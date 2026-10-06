@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# ── Deny access to sensitive directories ──────────────────────────────────────
+RewriteCond %{REQUEST_URI} ^/(config|includes)(/|$) [NC]
+RewriteRule ^ - [F,L]
+
+# ── Deny access to sensitive file types ───────────────────────────────────────
+<FilesMatch "\.(env|log|sql)$">
+    Require all denied
+</FilesMatch>
+
+# ── Default index files ───────────────────────────────────────────────────────
+DirectoryIndex index.php
+
+# ── Set charset ───────────────────────────────────────────────────────────────
+AddDefaultCharset UTF-8
+
+# ── Prevent directory listing ────────────────────────────────────────────────
+Options -Indexes

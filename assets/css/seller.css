@@ -1,0 +1,112 @@
+/* ─── NovaMart — Seller Dashboard Styles ────────────── */
+:root {
+  --seller-primary: #059669;
+  --seller-primary-dark: #047857;
+  --seller-bg: #F0FDF4;
+  --seller-card: #fff;
+}
+
+body { background: var(--seller-bg); }
+
+/* ─── Sidebar ───────────────────────────────────────── */
+.seller-layout { display: flex; min-height: 100vh; }
+.seller-sidebar {
+  width: 240px;
+  background: var(--seller-primary);
+  color: #fff;
+  flex-shrink: 0;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 100;
+  transition: transform .3s;
+}
+.seller-sidebar .nav-link {
+  color: rgba(255,255,255,.8);
+  padding: .6rem 1.1rem;
+  font-size: .88rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  transition: background .15s;
+}
+.seller-sidebar .nav-link:hover,
+.seller-sidebar .nav-link.active { background: rgba(255,255,255,.15); color: #fff; }
+.seller-sidebar .nav-link i { width: 18px; text-align: center; }
+.seller-sidebar .brand {
+  padding: 1rem 1.1rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+/* ─── Main content ──────────────────────────────────── */
+.seller-main {
+  flex: 1;
+  margin-left: 240px;
+  padding: 1.5rem;
+}
+
+/* ─── Stat cards ────────────────────────────────────── */
+.seller-stat {
+  background: var(--seller-card);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.seller-stat .stat-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #fff;
+}
+.seller-stat .stat-value { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+.seller-stat .stat-label { font-size: .78rem; color: var(--gray-600); margin-top: 2px; }
+.si-green  { background: var(--seller-primary); }
+.si-blue   { background: #3B82F6; }
+.si-orange { background: #F59E0B; }
+.si-red    { background: #EF4444; }
+
+/* ─── Table ─────────────────────────────────────────── */
+.seller-table {
+  background: var(--seller-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.seller-table .table { margin-bottom: 0; }
+.seller-table th {
+  font-size: .8rem;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  font-weight: 600;
+  background: var(--seller-bg);
+  border-bottom: 2px solid var(--gray-200);
+  padding: .7rem 1rem;
+}
+.seller-table td { padding: .7rem 1rem; vertical-align: middle; font-size: .9rem; }
+
+/* ─── Cards ─────────────────────────────────────────── */
+.seller-card {
+  background: var(--seller-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.seller-card h5 { font-weight: 700; margin-bottom: 1rem; }
+
+/* ─── Responsive ────────────────────────────────────── */
+@media (max-width: 992px) {
+  .seller-sidebar { transform: translateX(-100%); }
+  .seller-sidebar.show { transform: translateX(0); }
+  .seller-main { margin-left: 0; }
+}
