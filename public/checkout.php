@@ -8,6 +8,7 @@ require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../config/paypal.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/navbar.php';
 
 $pageTitle = 'Checkout';
 requireLogin();
@@ -118,6 +119,9 @@ $userName    = $_SESSION['user']['name'] ?? '';
 $userEmail   = $_SESSION['user']['email'] ?? '';
 $userPhone   = $_SESSION['user']['phone'] ?? '';
 $userAddress = $_SESSION['user']['address'] ?? '';
+$shippingName  = $userName;
+$shippingPhone = $userPhone;
+$shippingAddr  = $userAddress;
 
 // ── Handle checkout POST ──────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'place_order') {
@@ -259,7 +263,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'place
   <link href="<?= APP_URL ?>/assets/css/style.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100">
-<?php require __DIR__ . '/../includes/navbar.php'; ?>
+<?= $navbar ?>
 
 <main class="flex-grow-1 py-4">
   <div class="container">

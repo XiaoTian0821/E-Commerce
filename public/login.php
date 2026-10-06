@@ -140,9 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <hr class="my-4">
           <div class="small text-muted text-center">
             <p class="mb-1"><strong>Test Accounts:</strong></p>
-            <p>Admin: <code>admin@novamart.com</code> / <code Admin@123</code></p>
-            <p>Customer: <code>alice@novamart.com</code> / <code Admin@123</code></p>
-            <p>Seller: <code>john@novamart.com</code> / <code Admin@123</code></p>
+            <p>Admin: <code>admin@novamart.com</code> / <code>Admin@123</code></p>
+            <p>Customer: <code>alice@example.com</code> / <code>Admin@123</code></p>
+            <p>Seller: <code>ali@novamart.com</code> / <code>Admin@123</code></p>
           </div>
         </div>
       </div>

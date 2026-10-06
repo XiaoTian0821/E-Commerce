@@ -7,6 +7,7 @@ require_once __DIR__ . '/../config/app.php';
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/navbar.php';
 
 $pageTitle = 'Order Details';
 requireLogin();
@@ -80,7 +81,7 @@ $statusTimeline = [
   <link href="<?= APP_URL ?>/assets/css/style.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100">
-<?php require __DIR__ . '/../includes/navbar.php'; ?>
+<?= $navbar ?>
 
 <main class="flex-grow-1 py-4">
   <div class="container">

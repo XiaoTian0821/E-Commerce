@@ -12,10 +12,12 @@ $pageTitle = 'Shopping Cart';
 
 // ── AJAX actions ──────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' || isset($_GET['action'])) {
+    $action = $_GET['action'] ?? '';
+    $isAjax = $action !== '';
     header('Content-Type: application/json');
 
     // AJAX: Add to cart
-    if (( $_GET['action'] ?? '') === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (($action === 'add' || (!$isAjax && $_SERVER['REQUEST_METHOD'] === 'POST')) && $_SERVER['REQUEST_METHOD'] === 'POST') {
         require_once __DIR__ . '/../includes/csrf.php';
         $productId = (int)($_POST['product_id'] ?? 0);
         $quantity  = max(1, (int)($_POST['quantity'] ?? 1));
@@ -56,6 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || isset($_GET['action'])) {
         // Count cart items
         $cnt = $pdo->prepare("SELECT COALESCE(SUM(quantity),0) FROM cart_items ci JOIN carts c ON ci.cart_id=c.id WHERE c.user_id=?");
         $cnt->execute([$_SESSION['user_id']]);
+        if (!$isAjax) {
+            redirect('public/cart.php', 'Added to cart!', 'success');
+        }
         echo json_encode(['success'=>true,'message'=>'Added to cart!','cart_count'=>(int)$cnt->fetchColumn()]);
         exit;
     }
@@ -64,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || isset($_GET['action'])) {
     if (( $_GET['action'] ?? '') === 'remove') {
         $itemId = (int)($_POST['item_id'] ?? 0);
         if (!$itemId) { echo json_encode(['success'=>false]); exit; }
-        $del = $pdo->prepare("DELETE FROM cart_items ci JOIN carts c ON ci.cart_id=c.id WHERE ci.id=? AND c.user_id=?",);
+        $del = $pdo->prepare("DELETE ci FROM cart_items AS ci INNER JOIN carts AS c ON ci.cart_id=c.id WHERE ci.id=? AND c.user_id=?");
         $del->execute([$itemId, $_SESSION['user_id']]);
         echo json_encode(['success'=>true,'message'=>'Item removed.']);
         exit;
@@ -314,7 +319,7 @@ $totalAmount = max(0, $subtotal - $discountAmount + $shippingFee);
 <?php require __DIR__ . '/../includes/footer.php'; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?= APP_URL ?>/assets/js/main.js"></script>
-<script src="<?= APP_URL ?>/assets/js/cart.js"></script>
-<script src="<?= APP_URL ?>/assets/js/checkout.js"></script>
+<script src="<?= APP_URL ?>/assets/js/cart.js?v=<?= filemtime(__DIR__ . '/../assets/js/cart.js') ?>"></script>
+<script src="<?= APP_URL ?>/assets/js/checkout.js?v=<?= filemtime(__DIR__ . '/../assets/js/checkout.js') ?>"></script>
 </body>
 </html>
