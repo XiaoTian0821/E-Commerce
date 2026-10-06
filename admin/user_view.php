@@ -5,9 +5,9 @@
 define('APP_START', true);
 require_once __DIR__ . '/../config/app.php';
 require_once __DIR__ . '/../config/db.php';
-require_once __DIR__ . '/includes/functions.php';
-require_once __DIR__ . '/includes/auth.php';
-require_once __DIR__ . '/includes/admin_navbar.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/admin_navbar.php';
 requireRole('admin');
 
 $pageTitle = 'View User';
@@ -42,7 +42,6 @@ $totalSpent = (float)$spentStmt->fetchColumn();
   <link href="<?= APP_URL ?>/assets/css/admin.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-<?= $adminNavbar ?>
 
 <div class="container py-4">
   <a href="<?= APP_URL ?>/admin/users.php" class="btn btn-outline-secondary btn-sm mb-3">

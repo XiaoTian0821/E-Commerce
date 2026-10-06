@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <hr class="my-3">
       <div class="small text-muted text-center">
         <p class="mb-1"><strong>Test Account:</strong></p>
-        <p>Email: <code>admin@novamart.com</code><br>Password: <code>Admin@123</code></p>
+        <p>Email: <code>admin@novamart.com</code><br>Password: <code>admin123</code></p>
       </div>
     </div>
   </div>
